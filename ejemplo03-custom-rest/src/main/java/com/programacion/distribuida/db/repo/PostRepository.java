@@ -1,12 +1,10 @@
-package com.programacion.distribuida.repo;
+package com.programacion.distribuida.db.repo;
 
 
-import com.programacion.distribuida.db.Post;
+import com.programacion.distribuida.db.db.Post;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 import java.util.Optional;

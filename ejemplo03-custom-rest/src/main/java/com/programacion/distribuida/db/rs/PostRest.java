@@ -1,7 +1,7 @@
-package com.programacion.distribuida.rs;
+package com.programacion.distribuida.db.rs;
 
-import com.programacion.distribuida.db.Post;
-import com.programacion.distribuida.repo.PostRepository;
+import com.programacion.distribuida.db.db.Post;
+import com.programacion.distribuida.db.repo.PostRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

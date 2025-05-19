@@ -1,10 +1,9 @@
-package com.programacion.distribuida;
+package com.programacion.distribuida.db;
 
-import com.programacion.distribuida.db.Post;
+import com.programacion.distribuida.db.db.Post;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 
 public class Ejemplo03MainJPA {
     public static void main(String[] args) throws Exception {

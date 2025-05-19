@@ -1,8 +1,6 @@
-package com.programacion.distribuida.service;
+package com.programacion.distribuida.db.service;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
 
 @ApplicationScoped

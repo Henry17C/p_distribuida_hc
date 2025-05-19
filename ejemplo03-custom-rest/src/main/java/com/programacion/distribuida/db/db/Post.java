@@ -1,4 +1,4 @@
-package com.programacion.distribuida.db;
+package com.programacion.distribuida.db.db;
 
 import jakarta.persistence.*;
 

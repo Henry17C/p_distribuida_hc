@@ -1,7 +1,6 @@
-package com.programacion.distribuida.service;
+package com.programacion.distribuida.db.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class LogServiceImpl  implements LogService {

@@ -1,9 +1,7 @@
-package com.programacion.distribuida;
-import com.programacion.distribuida.service.StringService;
-import jakarta.enterprise.context.ApplicationScoped;
+package com.programacion.distribuida.db;
+import com.programacion.distribuida.db.service.StringService;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
-import jakarta.inject.Inject;
 
 
 public class PrincipalCdi {

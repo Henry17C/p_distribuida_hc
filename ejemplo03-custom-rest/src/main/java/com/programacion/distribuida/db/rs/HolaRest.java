@@ -1,7 +1,7 @@
-package com.programacion.distribuida.rs;
+package com.programacion.distribuida.db.rs;
 
 
-import com.programacion.distribuida.service.StringService;
+import com.programacion.distribuida.db.service.StringService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

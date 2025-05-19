@@ -1,4 +1,4 @@
-package com.programacion.distribuida.config;
+package com.programacion.distribuida.db.config;
 
 
 import jakarta.annotation.PostConstruct;
