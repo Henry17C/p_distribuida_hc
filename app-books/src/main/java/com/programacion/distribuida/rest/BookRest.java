@@ -27,50 +27,59 @@ public class BookRest {
     @Inject
     BooksRepository booksRepository;
 
-
     @GET
     @Path("/{isbn}")
-    public Response findByIsbn(@PathParam("isbn") String isbn) {
-    /*
-    return booksRepository.findByIdOptional(isbn)
-            .map(Response::ok)
-            .orElse(Response.status(Response.Status.NOT_FOUND))
-            .build();
-    */
-        BookDto ret = new BookDto();
-        //1.buscar el Libro
-        var obj= booksRepository.findByID(isbn);
+    public Response findById(@PathParam("isbn") String isbn) {
+
+
+        BookDto bookDto = new BookDto();
+
+        // 1. Buscar el libro
+        var obj = booksRepository.findByIdOptional(isbn);
         if (obj.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
         var book = obj.get();
-        ret.setIsbn(isbn);
-        ret.setTitle(book.getTitle());
-        ret.setPrice(book.getPrice());
-        //2.buscar el inventario
-        var inventary = book.getInventory();
-        if(inventary != null) {
-            //ret.setInventaySold(inventary.getSold());
-           // ret.setInventaySupplied(inventary.getSupplied());
+
+        bookDto.setIsbn(book.getIsbn());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setPrice(book.getPrice());
+
+        // 2. Buscar el inventario
+
+        var inventory = book.getInventory();
+        if (inventory != null) {
+            bookDto.setInventorySold(inventory.getSold());
+            bookDto.setInventorySupplied(inventory.getSupplied());
         }
-        //3.buscar los autores
+
+        // 3  Buscar los autores
         var client = ClientBuilder.newClient();
-        AuthorDto[] authors=client.target("http://localhost:8080" )
-                .path("/authors/find/{isbn}")
+        AuthorDto[] authors = client.target("http://localhost:8080")
+                .path("authors/find/{isbn}")
                 .resolveTemplate("isbn", isbn)
                 .request(MediaType.APPLICATION_JSON)
                 .get(AuthorDto[].class);
-        ret.setAuthors(Stream.of(authors)
-                .map(AuthorDto::getName)
-                .toList()
+        bookDto.setAuthors(
+                Stream.of(authors)
+                        .map(AuthorDto::getName)
+                        .toList()
         );
-        return Response.ok(ret)
-                .build();
+
+
+        return Response.ok(bookDto).build();
+
+
     }
 
     @GET
     public List<Book> findAll() {
         return booksRepository.listAll();
     }
+
+    @POST
+    public void insert(Book book) {
+        booksRepository.persist(book);
+    }
+
 }

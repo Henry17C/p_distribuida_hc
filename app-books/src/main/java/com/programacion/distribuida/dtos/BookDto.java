@@ -11,19 +11,15 @@ import java.util.List;
 @ToString
 public class BookDto {
 
-
-
-
     private String isbn;
+    //    private Inventory inventory;
     private String title;
-    private BigDecimal sold;
     private BigDecimal price;
 
-    private Integer invertarySold;
-    private Integer invetarySupplied;
+    private Integer inventorySold;
+    private Integer inventorySupplied;
 
     private List<String> authors;
-
 
 
 }
