@@ -32,6 +32,7 @@ dependencies {
     //JPA
     implementation("io.quarkus:quarkus-hibernate-orm-panache")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
+    implementation("org.modelmapper:modelmapper:3.2.2")
 
     //Control de versiones Flyway
     /*implementation("io.quarkus:quarkus-flyway")
