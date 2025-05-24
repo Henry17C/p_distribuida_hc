@@ -1,5 +1,6 @@
 package com.programacion.distribuida.services;
 
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.Produces;
 import org.modelmapper.ModelMapper;
@@ -13,4 +14,6 @@ public class MapperService {
     public ModelMapper mapper() {
         return new ModelMapper();
     }
+
+
 }

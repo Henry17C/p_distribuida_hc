@@ -16,7 +16,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 //@RegisterRestClient(baseUri = "http://localhost:8081")
-@RegisterRestClient(configKey = "author-api")
+@RegisterRestClient(configKey = "authors.api")
 public interface AuthorRestClient {
 
     @GET
