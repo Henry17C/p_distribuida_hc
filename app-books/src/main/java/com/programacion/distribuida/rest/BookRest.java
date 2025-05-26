@@ -5,11 +5,14 @@ import com.programacion.distribuida.db.Book;
 import com.programacion.distribuida.dtos.AuthorDto;
 import com.programacion.distribuida.dtos.BookDto;
 import com.programacion.distribuida.repo.BooksRepository;
+import io.smallrye.mutiny.Uni;
+import io.smallrye.stork.Stork;
+import io.smallrye.stork.api.Service;
+import io.smallrye.stork.api.ServiceInstance;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -18,6 +21,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Path("/books")
@@ -44,20 +48,51 @@ public class BookRest {
     @RestClient
     private AuthorRestClient client;
 
-    /*
-    @PostConstruct
-    void init() {
-        client = RestClientBuilder.newBuilder()
-                .baseUrl(authorsUrl)
-                .build(AuthorRestClient.class);
-    }
-*/
 
     @GET
     @Path("/{isbn}")
     public Response findByIsbn(@PathParam("isbn") String isbn) {
 
-        BookDto ret  = new BookDto();
+
+        var stork = Stork.getInstance();
+
+        Service service = stork.getService("authors-api");
+        Uni<List<ServiceInstance>> instances = service.getInstances();
+
+        Uni<ServiceInstance> instance = service.selectInstance();
+
+        Map<String, Service> services = stork.getServices();
+        System.out.println(services);
+
+
+
+
+        Map<String, Service> serviceMap = stork.getServices();
+        serviceMap.entrySet()
+                .stream()
+                .forEach(entry -> {
+                    System.out.println(entry.getKey() + " " + entry.getValue());
+                    var ser = entry.getValue();
+                    ser.getInstances()
+                            .subscribe()
+                            .with(ls -> {
+                                ls.forEach(inst -> {
+                                    System.out.println("   " + inst.getHost() + " " + inst.getPort());
+                                });
+                            });
+                });
+        Service service1 = stork.getService("authors-api");
+        Uni<ServiceInstance> instanceUni = service1.selectInstance();
+        instanceUni.subscribe()
+                .with(insta -> {
+                });
+        System.out.println(serviceMap);
+
+
+
+        BookDto ret = new BookDto();
+
+
 
         // 1. Buscar el libro
         var obj = booksRepository.findByIdOptional(isbn);

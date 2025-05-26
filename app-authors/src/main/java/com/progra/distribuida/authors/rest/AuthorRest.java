@@ -2,7 +2,6 @@ package com.progra.distribuida.authors.rest;
 
 import com.progra.distribuida.authors.db.Author;
 import com.progra.distribuida.authors.repo.AuthorRepository;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -16,7 +15,7 @@ import java.util.List;
 @Path("/authors")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@ApplicationScoped
+//@ApplicationScoped
 public class AuthorRest {
 
   @Inject

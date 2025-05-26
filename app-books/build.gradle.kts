@@ -12,8 +12,8 @@ repositories {
 }
 val quarkusVersion = "3.22.2"
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 dependencies {
@@ -40,6 +40,11 @@ dependencies {
     //Control de versiones Flyway
     /*implementation("io.quarkus:quarkus-flyway")
     implementation("org.flywaydb:flyway-database-postgresql")*/
+
+    //Service Discovery
+
+    implementation("io.quarkus:quarkus-smallrye-stork")
+    implementation("io.smallrye.stork:stork-service-discovery-static-list")
 }
 
 tasks.withType<JavaCompile> {
