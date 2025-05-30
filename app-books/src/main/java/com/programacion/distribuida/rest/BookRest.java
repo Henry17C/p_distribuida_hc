@@ -40,6 +40,7 @@ public class BookRest {
     ModelMapper mapper;
 
 
+
     @Inject
     @ConfigProperty(name = "authors.url")
     String authorsUrl;
@@ -54,19 +55,26 @@ public class BookRest {
     public Response findByIsbn(@PathParam("isbn") String isbn) {
 
 
-        var stork = Stork.getInstance();
+       /* var stork = Stork.getInstance();
 
         Service service = stork.getService("authors-api");
-        Uni<List<ServiceInstance>> instances = service.getInstances();
-
-        Uni<ServiceInstance> instance = service.selectInstance();
+        //Uni<List<ServiceInstance>> instances = service.getInstances();
+        //Uni<ServiceInstance> instance = service.selectInstance();
 
         Map<String, Service> services = stork.getServices();
-        System.out.println(services);
+        //System.out.println(services);
+
+        services.entrySet()
+                .stream()
+                .forEach(it->{
+                    System.out.println(it.getKey());
+                        });
+
+        */
 
 
 
-
+        /*
         Map<String, Service> serviceMap = stork.getServices();
         serviceMap.entrySet()
                 .stream()
@@ -81,13 +89,21 @@ public class BookRest {
                                 });
                             });
                 });
-        Service service1 = stork.getService("authors-api");
-        Uni<ServiceInstance> instanceUni = service1.selectInstance();
-        instanceUni.subscribe()
-                .with(insta -> {
-                });
-        System.out.println(serviceMap);
 
+                */
+
+
+
+       /* Service service1 = stork.getService("authors-api");
+        Uni<ServiceInstance> instanceUni = service1.selectInstance();
+        instanceUni
+                .subscribe()
+                .with(insta -> {
+                    System.out.println(" "+ insta.getHost()+ ":" + insta.getPort());
+                });
+*/
+
+        //System.out.println(serviceMap);
 
 
         BookDto ret = new BookDto();
