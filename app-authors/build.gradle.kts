@@ -33,6 +33,13 @@ dependencies {
     //Control de versiones Flyway
     implementation("io.quarkus:quarkus-flyway")
     implementation("org.flywaydb:flyway-database-postgresql")
+
+
+    // Service Discovery dinámico con Consul
+    implementation("io.quarkus:quarkus-smallrye-stork")
+    implementation("io.smallrye.stork:stork-service-discovery-consul")
+    implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client") // Mutiny para programación reactiva
+    //implementation("io.smallrye.reactive:smallrye-reactive-messaging-kafka")
 }
 
 tasks.withType<JavaCompile> {
