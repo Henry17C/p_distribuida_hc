@@ -43,4 +43,6 @@ bin/
 
 ##### Mas
 **/traefik.exe
+**/nomad.exe
+**/consul.exe
 
