@@ -11,6 +11,7 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Path("/authors")
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,6 +26,9 @@ public class AuthorRest {
 
     @Inject
     AuthorRepository authorRepository;
+
+    AtomicInteger index = new AtomicInteger(1);
+
 
     @GET
     @Path("/{id}")
@@ -83,6 +87,13 @@ public class AuthorRest {
 
         //Config config = ConfigProvider.getConfig();
 
+        //genera errores
+        int valor = index.getAndIncrement();
+        if (valor % 5 != 0) {
+            String msg = String.format("Intento %d, genrando error", valor);
+            throw new RuntimeException("author*****************************"+ msg);
+        }
+
         Config config = ConfigProvider.getConfig();
 
         config.getConfigSources().forEach(obj -> {
@@ -101,5 +112,12 @@ public class AuthorRest {
                     return obj;
                 }).toList();
     }
+
+
+
+
+
+
+
 
 }

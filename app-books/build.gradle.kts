@@ -50,6 +50,10 @@ dependencies {
 //Service Discovery
     // implementation("io.quarkus:quarkus-smallrye-stork")
     //implementation("io.smallrye.stork:stork-service-discovery-static-list")
+
+   // Control de errores de comunicacion con patrones de resiliencia FAULT TORERANCE
+    implementation("io.quarkus:quarkus-smallrye-fault-tolerance")
+
 }
 
 tasks.withType<JavaCompile> {
