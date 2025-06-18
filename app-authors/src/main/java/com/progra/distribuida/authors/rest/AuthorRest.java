@@ -87,7 +87,7 @@ public class AuthorRest {
 
         //Config config = ConfigProvider.getConfig();
 
-        //genera errores
+        //Generar errores
         int valor = index.getAndIncrement();
         if (valor % 5 != 0) {
             String msg = String.format("Intento %d, genrando error", valor);

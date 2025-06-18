@@ -4,7 +4,7 @@ plugins {
     id("io.quarkus") version "3.22.2"
 }
 
-group = "org.example"
+group = "com.programacion.distribuida"
 version = "unspecified"
 
 repositories {

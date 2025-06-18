@@ -22,11 +22,19 @@ public interface AuthorRestClient {
     @Retry(maxRetries = 3, delay = 1000) // Retry up to 3 times with a 1 second delay
     @Fallback(fallbackMethod = "findByBookFallback")
     public List<AuthorDto> findByBook(@PathParam("isbn") String isbn);
-default AuthorDto findByBookFallback(String isbn) {
+
+    /*default AuthorDto findByBookFallback(String isbn) {
     var dto= new AuthorDto();
     dto.setName("No Author Found");
     dto.setId("-1");
 
     return dto; // Return an empty list as a fallback
-}
+}*/
+
+    default List<AuthorDto> findByBookFallback(String isbn) {
+        AuthorDto dto = new AuthorDto();
+        dto.setName("No Author Found");
+        dto.setId("-1");
+        return List.of(dto);
+    }
 }

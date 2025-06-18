@@ -4,11 +4,6 @@ import com.programacion.distribuida.db.Book;
 import com.programacion.distribuida.dtos.AuthorDto;
 import com.programacion.distribuida.dtos.BookDto;
 import com.programacion.distribuida.repo.BooksRepository;
-import io.smallrye.mutiny.Uni;
-import io.smallrye.stork.Stork;
-import io.smallrye.stork.api.Service;
-import io.smallrye.stork.api.ServiceInstance;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,6 +18,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 @Path("/books")
@@ -41,6 +37,8 @@ public class BookRest {
     @Inject
     @RestClient
     AuthorRestClient client;
+
+    AtomicInteger index = new AtomicInteger(1); //Generar errores
 
 
     // Metodo para buscar por ISBN con LISTA DE AUTORES.
@@ -70,6 +68,15 @@ public class BookRest {
         instance.subscribe().with(inst -> {
             System.out.println("Instancia seleccionada: " + inst.getId() + " - " + inst.getHost() + ":" + inst.getPort());
         });*/
+
+
+        //Generar errores de prueba
+        int valor = index.getAndIncrement();
+        if (valor % 5 != 0) {
+            String msg = String.format("Intento %d, genrando error", valor);
+            throw new RuntimeException("author*****************************"+ msg);
+        }
+
 
 
         // 1. Buscar el Libro

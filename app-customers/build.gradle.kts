@@ -14,8 +14,8 @@ repositories {
 val quarkusVersion = "3.22.2"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
@@ -41,9 +41,13 @@ dependencies {
 //    implementation("io.quarkus:quarkus-smallrye-stork")
 //    implementation("io.smallrye.stork:stork-service-discovery-static-list")
 
+// Service Discovery dinámico con Consul
     implementation("io.quarkus:quarkus-smallrye-stork")
     implementation("io.smallrye.stork:stork-service-discovery-consul")
-    implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client")
+    implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client") // Mutiny para programación reactiva
+
+    // Control de errores de comunicacion con patrones de resiliencia FAULT TORERANCE
+    implementation("io.quarkus:quarkus-smallrye-fault-tolerance")
 }
 
 tasks.withType<JavaCompile> {
