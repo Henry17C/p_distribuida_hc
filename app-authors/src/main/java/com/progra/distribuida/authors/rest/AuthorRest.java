@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AuthorRest {
 
   @Inject
-  @ConfigProperty(name ="quakus.http.port")
+  @ConfigProperty(name ="quarkus.http.port")
 
   Integer httpPort;
 

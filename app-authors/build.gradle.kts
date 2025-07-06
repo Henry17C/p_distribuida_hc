@@ -40,6 +40,13 @@ dependencies {
     implementation("io.smallrye.stork:stork-service-discovery-consul")
     implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client") // Mutiny para programación reactiva
     //implementation("io.smallrye.reactive:smallrye-reactive-messaging-kafka")
+
+    // Telemetria: metricas
+    implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
+    implementation("io.quarkus:quarkus-jackson")
+
+
+
 }
 
 tasks.withType<JavaCompile> {
