@@ -105,3 +105,5 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin # Puedes cambiar 'admin' por el usuario que quieras
       - GF_SECURITY_ADMIN_PASSWORD=admin
+
+
