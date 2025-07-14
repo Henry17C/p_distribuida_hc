@@ -69,6 +69,17 @@ public class AuthorLifecycle {
                 ;
 
         consulClient.registerServiceAndAwait(serviceOptions);
+ // Registrar un health check adicional para la ruta /q/health
+
+        var healthCheck = new CheckOptions()
+                .setId("app-authors-health") // ID único
+                .setName("Health check - /q/health")
+                .setHttp(String.format("http://%s:%d/q/health", ipAddress.getHostAddress(), appPort))
+                .setInterval("10s")
+                .setDeregisterAfter("30s");
+
+// Registrar el check adicional en Consul
+        consulClient.registerCheckAndAwait(healthCheck);
     }
 
     void stop(@Observes ShutdownEvent event, Vertx vertx) {

@@ -1,4 +1,4 @@
-package com.programacion.distribuida.customers;
+package com.programacion.distribuida.rest;
 
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
-public class CustomerLifecycle {
+public class BookLifecycle {
 
     @Inject
     @ConfigProperty(name = "consul.host", defaultValue = "localhost")
@@ -34,7 +34,7 @@ public class CustomerLifecycle {
     String serviceId;
 
     void init(@Observes StartupEvent event, Vertx vertx) throws Exception {
-        System.out.println("Starting Customer Service...");
+        System.out.println("Starting Book Service...");
         ConsulClientOptions options = new ConsulClientOptions()
                 .setHost(consulHost)
                 .setPort(consulPort);
@@ -45,19 +45,21 @@ public class CustomerLifecycle {
 
         var tags = List.of(
                 "traefik.enable=true",
-                "traefik.http.routers.app-customers.rule=PathPrefix(`/app-customers`)",
-                "traefik.http.routers.app-customers.middlewares=strip-prefix-customers",
-                "traefik.http.middlewares.strip-prefix-customers.stripprefix.prefixes=/app-customers"
+                "traefik.http.routers.app-books.rule=PathPrefix(`/app-books`)",
+                "traefik.http.routers.app-books.middlewares=strip-prefix-books",
+                "traefik.http.middlewares.strip-prefix-books.stripprefix.prefixes=/app-books"
         );
+
 
         var checkOptions = new CheckOptions()
                 .setHttp(String.format("http://%s:%d/ping", ipAddress.getHostAddress(), appPort))
                 .setInterval("10s")
                 .setDeregisterAfter("20s");
 
+
         ServiceOptions serviceOptions = new ServiceOptions()
                 .setId(serviceId)
-                .setName("app-customers")
+                .setName("app-books")
                 .setAddress(ipAddress.getHostAddress())
                 .setPort(appPort)
                 .setTags(tags)
@@ -79,7 +81,7 @@ public class CustomerLifecycle {
     }
 
     void stop(@Observes ShutdownEvent event, Vertx vertx) {
-        System.out.println("Stopping Customer Service...");
+        System.out.println("Stopping Book Service...");
         ConsulClientOptions options = new ConsulClientOptions()
                 .setHost(consulHost)
                 .setPort(consulPort);
