@@ -21,9 +21,9 @@ spec:
             - name: QUARKUS_DATASOURCE_USERNAME
               value: postgres
             - name: QUARKUS_DATASOURCE_PASSWORD
-              value: labcom,2015
+              value: postgres
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://base_de_datos:5432/db_libreria
+              value: jdbc:postgresql://library.crnn8whpm2rl.us-east-1.rds.amazonaws.com:5432/postgres
             - name: QUARKUS_HTTP_PORT
               value: "8080"
             - name: CONSUL_HOST
@@ -85,3 +85,8 @@ spec:
           type: Utilization
           averageUtilization: 50
 
+##Levantar servicio
+# kubectl apply -f app-books-deployment.yml
+
+## Eliminar servicio
+#  kubectl delete all --allc

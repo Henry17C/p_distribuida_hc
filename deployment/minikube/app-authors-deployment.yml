@@ -8,22 +8,22 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-autores
+      app: app-authors
   template:
     metadata:
       labels:
-        app: app-autores
+        app: app-authors
     spec:
       containers:
-        - name: app-autores
-          image: henry170/app-autores:latest
+        - name: app-authors
+          image: henry170/app-authors:latest
           env:
             - name: QUARKUS_DATASOURCE_USERNAME
               value: postgres
             - name: QUARKUS_DATASOURCE_PASSWORD
-              value: labcom,2015
+              value: postgres
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://base_de_datos:5432/db_libreria
+              value: jdbc:postgresql://library.crnn8whpm2rl.us-east-1.rds.amazonaws.com:5432/postgres
             - name: QUARKUS_HTTP_PORT
               value: "8080"
             - name: CONSUL_HOST
@@ -53,8 +53,15 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: app-autores
+    app: app-authors
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+
+
+##Levantar servicio
+# kubectl apply -f app-authors-deployment.yml
+
+## Eliminar servicio
+#  kubectl delete all --allc
